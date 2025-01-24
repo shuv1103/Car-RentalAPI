@@ -118,7 +118,7 @@ const rentCar = asyncHandler(async(req,res)=>{
         <h3>Car Rental Confirmation</h3>
         <p>Dear ${user.name},</p>
         <p>Your booking for the car <b>${car.model}</b> (${car.manufacturer}) has been confirmed.</p>
-        <p><b>Rental Duration:</b> ${rentStart.toDateString()} to ${rentEnd.toDateString()}</p>
+        <p><b>Rental Duration:</b> ${rentStart.toDateString()} tno ${rentEnd.toDateString()}</p>
         <p><b>Total Cost:</b> $${totalPrice}</p>
         <p>Thank you for choosing our service!</p>
     `
