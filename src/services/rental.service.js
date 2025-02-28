@@ -1,5 +1,6 @@
 import {Car} from "../models/car.model.js"
 import {User} from "../models/user.model.js"
+import { waitListQueue } from "./waitList.service.js"
 import { sendEmail } from "../notifications/user.email.js"
 import { asyncHandler } from "../utils/asyncHandler.js"
 import { ApiError } from "../utils/ApiError.js"
@@ -7,20 +8,46 @@ import { ApiResponse } from "../utils/ApiResponse.js"
 
 // Car-Availability logic
 const checkCarAvailability = asyncHandler(async(req,res)=>{
-    const {carId} = req.body
+    const {userId, carId} = req.body
 
-    if(!carId)
+    if(!carId || !userId)
     {
-        throw new ApiError(400,"Car Id is required")
+        throw new ApiError(400,"Car Id and User Id is required")
     }
 
-    // Fetch the car from DB
-    const car = Car.findById(carId)
+    // Fetch the user document having that userId from DB(collection)
+    const user = await User.findById(userId)
 
-    // check car availability in DB
+    // check if a user with given userId exists in User Collection
+    if(!user)
+    {
+        throw new ApiError(404,"User not found")
+    }
+
+    // Fetch the car document having that carId from DB(collection)
+    const car = await Car.findById(carId)
+
+    // check if a car with given carId exists in Car Collection
     if(!car)
     {
         throw new ApiError(404,"Car not found")
+    }
+
+    // check if car available for rent
+    if(!car.isAvailability)
+    { 
+        // car not available, add to waiting queue
+        await waitListQueue.add("waitlist",{userId, carId})
+        return res.status(200).json(
+            new ApiResponse(
+                200,
+                {
+                    carId: carId,
+                    isAvailability: false
+                },
+                "Car unavailable. Added to the waitlist"
+            )
+        )
     }
 
     // send the response
