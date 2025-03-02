@@ -50,7 +50,7 @@ const checkCarAvailability = asyncHandler(async(req,res)=>{
         )
     }
 
-    // send the response
+    // car is available for rent
     return res.status(200).json(
         new ApiResponse(
             200,
@@ -58,7 +58,7 @@ const checkCarAvailability = asyncHandler(async(req,res)=>{
                 carId: carId,
                 isAvailability: car.isAvailability
             },
-            car.isAvailability ? "Car is available" : "Car is not available"
+            "Car is available"
         )
     )
 })
