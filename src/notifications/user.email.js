@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport({
 })
 
 // function to send email
-const sendEmail = async({to,subject,text,html}) => {
+const sendEmail = async({to,subject,text,html}) => {    // {to,subject,...} - object destructuring
     const info = await transporter.sendMail({
         from: process.env.USER, // sender address
         to, // recipient's email
