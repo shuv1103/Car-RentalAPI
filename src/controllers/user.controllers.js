@@ -14,18 +14,18 @@ const authenticateUserController = async (req, res) => {
 
 // Controller for handling user logout
 const logoutUserController = async (req, res) => {
-    logOutUser(req,res)
+    logOutUser(req,res);
 }
 // Controller to get user by ID
 const getUserByIdController = async (req, res) => {
     // Call the repository function to fetch user by ID
-    getUserById(req,res)
+    getUserById(req,res);
 }
 
 // Controller to get user by email
 const getUserByEmailController = async (req, res) => {  
     // Call the repository function to fetch user by email
-    getUserByEmail(req,res)
+    getUserByEmail(req,res);
 }
 
 export { registerUserController, authenticateUserController, logoutUserController, getUserByIdController, getUserByEmailController };

@@ -45,12 +45,12 @@ userSchema.pre('save',async function(next){
 
     if(!this.isModified(this.password))
     {
-        return next()
+        return next();
     }
     else
     {
-        this.password = await bcrypt.hash(this.password,10)
-        next()
+        this.password = await bcrypt.hash(this.password,10);
+        next();
     }
 })
 
@@ -67,7 +67,7 @@ userSchema.methods.generateAccessToken = function()
         {
             expiresIn:process.env.ACCESS_TOKEN_EXPIRY
         }
-    )
+    );
 }
 
 userSchema.methods.generateRefreshToken = function(){
@@ -79,7 +79,7 @@ userSchema.methods.generateRefreshToken = function(){
         {
             expiresIn:process.env.ACCESS_TOKEN_EXPIRY
         }
-    )
+    );
 }
 
 

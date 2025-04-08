@@ -7,26 +7,26 @@ import { User } from "../models/user.model.js"
 // Add car to DB
 const addCar = asyncHandler(async(req,res)=>{
     // de-structure info about Car from json req.body
-    const {manufacturer, model, year, pricePerDay, count} = req.body
+    const {manufacturer, model, year, pricePerDay, count} = req.body;
     
     // validity check 
     if([manufacturer, model, year, pricePerDay, count].some(value => value == null || value.trim() === ''))
     {
-        throw new ApiError(400,"All fields are required")
+        throw new ApiError(400,"All fields are required");
     }
 
     // check year validity 
     const carYear = parseInt(year, 10);
     if(year < 1886 || year > new Date().getFullYear())
     {
-        throw new ApiError(400,"Invalid Year. Enter between 1886 and Current Year!")
+        throw new ApiError(400,"Invalid Year. Enter between 1886 and Current Year!");
     }
 
     // check price validity
     const carPricePerDay = parseFloat(pricePerDay);
     if(carPricePerDay < 0)
     {
-        throw new ApiError(400,"Price per day cannot be negative!")
+        throw new ApiError(400,"Price per day cannot be negative!");
     }
     
     // check count validity
@@ -95,7 +95,7 @@ const addCar = asyncHandler(async(req,res)=>{
 // Update car info to DB
 const updateCar = asyncHandler(async(req,res)=>{
     const {model, manufacturer, year, pricePerDay, isAvailability} = req.body;
-    const carId = req.params.id
+    const carId = req.params.id;
 
     // Validate carId
     if (!carId) {
@@ -137,18 +137,18 @@ const updateCar = asyncHandler(async(req,res)=>{
 
 // Get Car by its Id
 const getCarById = asyncHandler(async(req,res)=>{
-    const {carId} = req.query
+    const {carId} = req.query;
 
     if(carId == null || carId.trim() == '')
     {
-        throw new ApiError(400,"Car Id field required")
+        throw new ApiError(400,"Car Id field required");
     }
     
-    const car = await Car.findOne({carId})
+    const car = await Car.findOne({carId});
 
     if(!car)
     {
-        throw new ApiError(404,"Car Id donot exists")
+        throw new ApiError(404,"Car Id donot exists");
     }
 
     return res.status(200).json({
@@ -162,24 +162,24 @@ const getCarById = asyncHandler(async(req,res)=>{
 
 // Get all available cars
 const getAvailableCars = asyncHandler(async(req,res)=>{
-    const {userId,available} = req.query
+    const {userId,available} = req.query;
 
     if([userId,available].some(value => value == null || value.trim() == ''))
     {
-        throw new ApiError(400,"UserId & available fields are required")
+        throw new ApiError(400,"UserId & available fields are required");
     }
     
-    const user = await User.findOne({userId})
+    const user = await User.findOne({userId});
      if(!user)
     {
-        throw new ApiError(401,"User donot exist")
+        throw new ApiError(401,"User donot exist");
     }
 
-    const availableCars = await Car.find({isAvailability: true})
-    console.log(availableCars)
+    const availableCars = await Car.find({isAvailability: true});
+    console.log(availableCars);
     if(availableCars == null)
     {
-        throw new ApiError(404,"No cars are available, All are for rent")
+        throw new ApiError(404,"No cars are available, All are for rent");
     }
 
     return res.status(200).json({
@@ -195,7 +195,7 @@ const getAvailableCars = asyncHandler(async(req,res)=>{
 
 // Delete car by its Id
 const deleteCar = asyncHandler(async(req,res)=>{
-    const {carId} = req.params
+    const {carId} = req.params;
 
     if (!carId || carId.trim() === '') {
         throw new ApiError(400, "Car ID is required");

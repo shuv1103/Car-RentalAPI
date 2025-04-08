@@ -2,16 +2,16 @@ import { Router } from "express"
 import {getAvailableCarsController,addCarController,updateCarController,deleteCarController,checkCarAvailabilityController,rentCarController,getCarByIdController} from "../controllers/car.controllers.js"
 import { verifyJWT } from "../middlewares/auth.middlewares.js"
 
-const carRouter = Router()
+const carRouter = Router();
 
 // Define routes
-carRouter.route("/").post(verifyJWT,addCarController) // post request to add car to DB
-carRouter.route("/:id/rent").post(verifyJWT,rentCarController) // post request to rent car
-carRouter.route("/available").get(verifyJWT,checkCarAvailabilityController)
-carRouter.route("/").get(verifyJWT,getAvailableCarsController)
-carRouter.route("/:id").patch(verifyJWT,updateCarController)
-carRouter.route("/:id").delete(verifyJWT,deleteCarController)
-carRouter.route("/:id").get(verifyJWT,getCarByIdController)
+carRouter.route("/").post(verifyJWT,addCarController) // (ADMIN-SIDE) post request to add car to DB
+carRouter.route("/:id/rent").post(verifyJWT,rentCarController) // (USER-SIDE) post request to rent car
+carRouter.route("/available").get(verifyJWT,checkCarAvailabilityController) // (USER-SIDE)
+carRouter.route("/").get(verifyJWT,getAvailableCarsController) // (USER-SIDE)
+carRouter.route("/:id").patch(verifyJWT,updateCarController) // (ADMIN-SIDE)
+carRouter.route("/:id").delete(verifyJWT,deleteCarController) // (ADMIN-SIDE)
+carRouter.route("/:id").get(verifyJWT,getCarByIdController) // (USER/ADMIN both)
 
 export default carRouter
 
