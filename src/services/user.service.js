@@ -6,10 +6,10 @@ import bcrypt from "bcrypt"
 
 const registerUser = asyncHandler(async(req,res)=>{
     // de-structure info from json req 
-    const {name,email,password} = req.body
+    const {name,email,password,role} = req.body
 
     // required fields validation(empty or null check)
-    if([name,email,password].some(value => value == null || value.trim() === '')){
+    if([name,email,password,role].some(value => value == null || value.trim() === '')){
         throw new ApiError(400,"All fields are required")
     }
 
@@ -49,7 +49,8 @@ const registerUser = asyncHandler(async(req,res)=>{
     const user = await User.create({
         name,
         email,
-        password:hashedPassword
+        password:hashedPassword,
+        role
     })
     console.log(user);
 

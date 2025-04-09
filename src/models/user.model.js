@@ -30,6 +30,7 @@ const userSchema = new mongoose.Schema({
     },
     role:{
         type:String,
+        required: true,
         enum:['user','admin'],
     }
 },{timestamp:true})
@@ -61,7 +62,8 @@ userSchema.methods.generateAccessToken = function()
         _id:this._id,
         email:this.email,
         name:this.name,
-        userId:this.userId
+        userId:this.userId,
+        role: this.role
         },
         process.env.ACCESS_TOKEN_SECRET, 
         {
@@ -75,9 +77,9 @@ userSchema.methods.generateRefreshToken = function(){
         {
         _id:this._id,
         },
-        process.env.ACCESS_TOKEN_SECRET, // process.env is obj reference that is used to set/retrieve env variables
+        process.env.REFRESH_TOKEN_SECRET, // process.env is obj reference that is used to set/retrieve env variables
         {
-            expiresIn:process.env.ACCESS_TOKEN_EXPIRY
+            expiresIn:process.env.REFRESH_TOKEN_EXPIRY
         }
     );
 }
