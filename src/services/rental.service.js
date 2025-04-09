@@ -172,4 +172,38 @@ const rentCar = asyncHandler(async(req,res)=>{
     )
 })
 
-export {checkCarAvailability,rentCar}
+const returnCar = asyncHandler(async (req,res) => {
+    const carId = req.params.id;
+    const userId = req.user._id; // comes from verifyJWT
+
+    if([carId, userId].some(value => value == null || value.trim() == ''))
+    {
+        throw new ApiError(400, "All fields are required");
+    }
+
+    const car = await Car.findOne({carId});
+
+    if(!car)
+    {
+        throw new ApiError(404, "Car not found");
+    }
+
+    car.count = car.count + 1; // car returned
+    car.isAvailability = true;
+    
+    await car.save(); // save changes to DB
+
+    // trigger background job to notify next user in waitlist queue
+    await waitListQueue.add("notifyNextUser", {carId});
+
+    return res.status(200).json(
+        new ApiResponse(
+            200,
+            {
+               message : `Car ${car.model} returned successfully by user ${userId}` 
+            }
+        )
+    );
+});
+
+export {checkCarAvailability,rentCar,returnCar}
