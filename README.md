@@ -83,9 +83,7 @@ A scalable backend system for a **Car Rental Platform** built with **Node.js**, 
 - Notify admin via email for verification
 - Optional damage detection AI integration
 
----
-
-## Email Notifications
+## **Email Notifications**
 
 The backend sends automated emails in these cases:
 1. **Waitlist Turn** — User is notified when their waitlisted car is available.
