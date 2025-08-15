@@ -59,7 +59,21 @@ const carSchema = new mongoose.Schema({
                 required: true
             }
         }
-    ]
+    ],
+    returnImages: {
+        front: { 
+            type: String // cloudinary image url
+        },
+        back: { 
+            type: String // cloudinary image url
+        },
+        left: { 
+            type: String // cloudinary image url
+        },
+        right: { 
+            type: String // cloudinary image url
+        }
+    }
     
 },{
     timestamps:true
