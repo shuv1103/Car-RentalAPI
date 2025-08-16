@@ -28,14 +28,14 @@ const addToWaitList = asyncHandler(async(req,res)=>{
     }
 
     // check user exists in DB
-    const user = User.findById(userId);
+    const user = await User.findById(userId);
     if(!user)
     {
         throw new ApiError(404,"User not found!");
     }
 
     // check car exists in DB
-    const car = Car.findById(carId)
+    const car = await Car.findById(carId);
     if(!car)
     {
         throw new ApiError(404,"Car not found!");
@@ -51,8 +51,19 @@ const addToWaitList = asyncHandler(async(req,res)=>{
         throw new ApiError(409,`User ${userId}  already in waitlist for car ${carId}`);
     }
 
-    // add userId, current timestamp(milliseconds), waitlistkey of the user
-    await redis.zadd(userId, Date.now(), waitlistkey);
+    // add userId, current timestamp(milliseconds), waitlistkey of the user 
+    await redis.zadd(waitlistkey, Date.now(), userId);
+
+    // add a bullmq job to process the waitlist
+    await waitListQueue.add("WaitListUsers", { carId, userId, addedAt: Date.now() }, {
+        attempts: 3, 
+        backoff: {
+            type: 'exponential',
+            delay: 5000 // retry after 5 seconds
+        },
+        removeOnComplete: true, // auto-remove job after completion
+        removeOnFail: true // auto-remove job if it fails
+    });
 
     // return response
     return res.status(200).json(
