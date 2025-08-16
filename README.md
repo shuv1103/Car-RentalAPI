@@ -17,15 +17,18 @@ A scalable backend system for a **Car Rental Platform** built with **Node.js**, 
 
 4. **Set up your .env file**
     ```bash
-    PORT=5000
-    MONGO_URI=your_mongodb_uri
-    JWT_SECRET=your_jwt_secret
-    REDIS_URL=your_redis_url
-    AWS_ACCESS_KEY_ID=your_aws_access_key
-    AWS_SECRET_ACCESS_KEY=your_aws_secret
-    S3_BUCKET_NAME=your_s3_bucket_name
-    EMAIL_USER=your_email@example.com
-    EMAIL_PASS=your_email_password
+   PORT=8000
+   MONGODB_URI=your_mongodb_uri_here
+   CORS_ORIGIN=*
+   ACCESS_TOKEN_SECRET=your_access_token_secret_here
+   ACCESS_TOKEN_EXPIRY=40m
+   REFRESH_TOKEN_SECRET=your_refresh_token_secret_here
+   REFRESH_TOKEN_EXPIRY=10d
+   EMAIL_USER=your_email@example.com
+   EMAIL_PASS=your_email_password
+   AWS_ACCESS_KEY_ID=your_aws_access_key
+   AWS_SECRET_ACCESS_KEY=your_aws_secret
+   S3_BUCKET_NAME=your_s3_bucket_name
 
 6. **Start the server**
    ```bash
