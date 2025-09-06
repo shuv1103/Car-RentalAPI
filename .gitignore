@@ -145,5 +145,4 @@ dist
 
 # env and node modules
 .env
-.env.sample
 node_modules
