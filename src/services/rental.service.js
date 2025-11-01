@@ -172,6 +172,7 @@ const rentCar = asyncHandler(async(req,res)=>{
     )
 })
 
+// Return-Car service logic
 const returnCar = asyncHandler(async (req,res) => {
     const carId = req.params.id;
     const userId = req.user._id; // comes from verifyJWT
