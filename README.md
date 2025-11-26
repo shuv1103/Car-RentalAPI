@@ -56,7 +56,7 @@ A scalable backend system for a **Car Rental Platform** built with **Node.js**, 
 - **File Storage:** AWS S3
 - **Authentication:** JWT + Bcrypt.js
 - **Email Service:** Nodemailer
-- **Optional AI Service:** Deep learning model for damage detection
+- **Payment Service:** Razorpay
 
 ---
 
