@@ -47,11 +47,8 @@ const verifyPayment = asyncHandler(async(req,res)=>{
         throw new ApiError(400, {success: false, message: "Payment verification failed!"});
     }
 
-
-    
-
 });
 
 
-export { createRazorpayOrder }
+export { createRazorpayOrder, verifyPayment }
 
