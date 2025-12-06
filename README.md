@@ -8,8 +8,8 @@ A scalable backend system for a **Car Rental Platform** built with **Node.js**, 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/car-rental-backend.git
-   cd car-rental-backend
+   git clone https://github.com/yourusername/Car-RentalAPI.git
+   cd car-rental-api
 
 2. **Install dependencies**
    ```bash
@@ -42,6 +42,7 @@ A scalable backend system for a **Car Rental Platform** built with **Node.js**, 
 - **Waitlist Mechanism** — Automatic queue management using **BullMQ** when cars are unavailable.
 - **Email Notifications** — Automatic emails when a waitlisted user's turn comes or fallback triggers.
 - **Car Return Process** — Requires uploading 4 images (front, back, left, right) before confirming return.
+- **Payment Integration** - Secured online-payments using Razorpay with order creation, payment verification & booking status updates.
 - **Damage Check Workflow** — Images sent to the admin for verification; optionally integrated with AI damage detection.
 - **AWS S3 Integration** — For secure, scalable car image storage.
 - **Admin Notifications** — Email alerts for car returns and damage reports.
