@@ -26,8 +26,14 @@ app.use((err, req, res, next) => {
 // import routes
 import userRouter from "./routes/user.routes.js"
 import carRouter from "./routes/car.routes.js"
+import paymentRouter from "./routes/payment.routes.js"
 
+// api versioning for car and user routes
 app.use("/api/v1/users",userRouter);
 app.use("/api/v1/cars",carRouter);
+
+// api versioning for payment route
+app.use("/api/v1/payment", paymentRouter);
+
 
 export {app}
