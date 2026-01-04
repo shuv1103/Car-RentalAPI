@@ -57,6 +57,33 @@ const carSchema = new mongoose.Schema({
             totalPrice: {
                 type: Number,
                 required: true
+            },
+            payment: {
+                orderId: {
+                  type: String,
+                  required: true
+                },
+          
+                paymentId: {
+                  type: String,
+                  default: null
+                },
+          
+                status: {
+                  type: String,
+                  enum: ["PENDING", "PAID", "FAILED", "EXPIRED"],
+                  default: "PENDING"
+                },
+          
+                failureReason: {
+                  type: String,
+                  default: null
+                }
+            },
+          
+            createdAt: {
+                type: Date,
+                default: Date.now
             }
         }
     ],

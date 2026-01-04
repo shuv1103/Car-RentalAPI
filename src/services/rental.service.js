@@ -61,7 +61,7 @@ const checkCarAvailability = asyncHandler(async(req,res)=>{
             "Car is available"
         )
     )
-})
+});
 
 
 // Rent-Car service logic
@@ -118,6 +118,8 @@ const rentCar = asyncHandler(async(req,res)=>{
     console.log("price per day = ",car.pricePerDay)
     console.log("total price = ",totalPrice)
 
+    const order = await createRazorpayOrder(totalPrice, car.carId)
+    
     // Initialize rentalHistory if undefined
     if (!Array.isArray(car.rentalHistory)) {
         car.rentalHistory = [];
@@ -128,16 +130,12 @@ const rentCar = asyncHandler(async(req,res)=>{
         email: user.email, // email: user._id
         startDate: rentStart,
         endDate: rentEnd,
-        totalPrice: totalPrice
+        totalPrice: totalPrice,
+        orderId: order.id,
+        amount: order.amount,
+        rentedAt: new Date()
     })
 
-    // update car's availability and count
-    car.count = car.count - 1 // decrease count by 1 after renting
-    if(car.count <= 0){
-        car.isAvailability = false
-    }
-
-    await car.save(); // Save the updated car to the database
     
     // send email notification
     const emailSubject = `Car Rental Confirmation: ${car.model}`;
@@ -165,12 +163,13 @@ const rentCar = asyncHandler(async(req,res)=>{
             200,
             {
                 rentalHistory: car.rentalHistory,
-                availability: car.isAvailability
+                availability: car.isAvailability,
+                paymentStatus: "PENDING"
             },
-            "Car rented successfully!"
+            "Payment initiated successfully. Complete payment to confirm the booking."
         )
     )
-})
+});
 
 // Return-Car service logic
 const returnCar = asyncHandler(async (req,res) => {
