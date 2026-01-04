@@ -1,7 +1,8 @@
-import { createRazorpayOrder, verifyPayment } from "../services/payment.service";
-import { ApiResponse } from "../utils/ApiResponse";
-import { ApiError } from "../utils/ApiError";
-import { asyncHandler } from "../utils/asyncHandler";
+import { createRazorpayOrder, verifyPayment } from "../services/payment.service.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiError } from "../utils/ApiError.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { clearScreenDown } from "readline";
 
 const generatePaymentOrder = asyncHandler(async(req,res) => {
     const {amount, receiptId} = req.body;
@@ -28,3 +29,9 @@ const generatePaymentOrder = asyncHandler(async(req,res) => {
         )
     )
 });
+
+const verifyPaymentController = asyncHandler(async(req,res) => {
+    return verifyPayment(req,res);
+});
+
+export {generatePaymentOrder, verifyPaymentController}
