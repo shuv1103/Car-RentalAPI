@@ -1,6 +1,6 @@
 # Car Rental Backend API
 
-A scalable backend system for a **Car Rental Platform** built with **Node.js**, **Express**, **MongoDB**, **BullMQ**, and **Redis**, designed for high performance, queue-based waitlist management, automated notifications, and secure image uploads using **AWS S3**.
+A scalable backend system for a **Car Rental Platform** built with **Node.js**, **Express**, **MongoDB**, **BullMQ**, and **Redis**, designed for high performance booking system, queue-based waitlist management, automated email-notifications, and secure payment integration*.
 
 ---
 
@@ -26,9 +26,6 @@ A scalable backend system for a **Car Rental Platform** built with **Node.js**, 
    REFRESH_TOKEN_EXPIRY=10d
    EMAIL_USER=your_email@example.com
    EMAIL_PASS=your_email_password
-   AWS_ACCESS_KEY_ID=your_aws_access_key
-   AWS_SECRET_ACCESS_KEY=your_aws_secret
-   S3_BUCKET_NAME=your_s3_bucket_name
 
 6. **Start the server**
    ```bash
@@ -43,9 +40,7 @@ A scalable backend system for a **Car Rental Platform** built with **Node.js**, 
 - **Email Notifications** — Automatic emails when a waitlisted user's turn comes or fallback triggers.
 - **Car Return Process** — Requires uploading 4 images (front, back, left, right) before confirming return.
 - **Payment Integration** - Secured online-payments using Razorpay with order creation, payment verification & booking status updates.
-- **Damage Check Workflow** — Images sent to the admin for verification; optionally integrated with AI damage detection.
-- **AWS S3 Integration** — For secure, scalable car image storage.
-- **Admin Notifications** — Email alerts for car returns and damage reports.
+- **Admin Notifications** — Email alerts for car returns.
 
 ---
 
@@ -54,10 +49,15 @@ A scalable backend system for a **Car Rental Platform** built with **Node.js**, 
 - **Backend Framework:** Node.js + Express.js
 - **Database:** MongoDB (Mongoose ODM)
 - **Queue System:** BullMQ + Redis
-- **File Storage:** AWS S3
 - **Authentication:** JWT + Bcrypt.js
 - **Email Service:** Nodemailer
 - **Payment Service:** Razorpay
+
+---
+
+## Database Schema
+
+<img width="1123" height="634" alt="image" src="https://github.com/user-attachments/assets/907649e4-a907-43d5-b8a0-34e248b35794" />
 
 ---
 
@@ -82,18 +82,12 @@ A scalable backend system for a **Car Rental Platform** built with **Node.js**, 
 - Automatic notification when a car becomes available
 - Fallback logic if a user doesn’t respond in time
 
-### **Car Return**
-- Upload 4 mandatory images before confirming return
-- Notify admin via email for verification
-- Optional damage detection AI integration
-
-## **Email Notifications**
+### **Email Notifications**
 
 The backend sends automated emails in these cases:
 1. **Waitlist Turn** — User is notified when their waitlisted car is available.
 2. **Waitlist Fallback** — User is notified when their waitlist request expires.
 3. **Car Return** — Admin receives uploaded car images for inspection.
-4. **Damage Detection** — Admin receives AI-detected damage report (if enabled).
 
 ---
 
