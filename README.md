@@ -1,4 +1,4 @@
-# Car Rental Backend System
+# AutoLease - Car Rental Backend System
 
 A scalable backend system for a **Car Rental Platform** built with **Node.js**, **Express**, **MongoDB**, **BullMQ**, and **Redis**, designed for high performance booking system, queue-based waitlist management, automated email-notifications, and secure payment integration*.
 
