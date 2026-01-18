@@ -1,6 +1,7 @@
 import {Router} from "express";
 import { registerUserController, authenticateUserController, getUserByIdController, getUserByEmailController } from "../controllers/user.controllers.js";
 import { verifyJWT } from "../middlewares/auth.middlewares.js";
+import { authorizeRoles } from "../middlewares/auth.roles.js";
 import { logOutUser } from "../services/user.service.js";
 
 const userRouter = Router()
@@ -8,22 +9,10 @@ const userRouter = Router()
 // Define routes 
 userRouter.route("/register").post(registerUserController)
 userRouter.route("/login").post(authenticateUserController)
-userRouter.route("/:id").get(verifyJWT,getUserByIdController)
-userRouter.route("/").get(verifyJWT,getUserByEmailController)
-userRouter.route("/logout").post(verifyJWT, logOutUser)
+userRouter.route("/:id").get(verifyJWT,authorizeRoles("admin","user"),getUserByIdController)
+userRouter.route("/").get(verifyJWT,authorizeRoles("admin"),getUserByEmailController)
+userRouter.route("/logout").post(verifyJWT,authorizeRoles("admin","user"), logOutUser)
 
 export default userRouter
 
-// import { Router } from "express";
-// import { registerUser, authenticateUser } from "../services/user.service.js";
-// import { getUserByEmail, getUserById } from "../repositories/user.repo.js";
 
-// const userRouter = Router()
-
-// // Define routes
-// userRouter.route("/register").post(registerUser)
-// userRouter.route("/auth").post(authenticateUser)
-// userRouter.route("/user-details-id").get(getUserById)
-// userRouter.route("/user-details-email").get(getUserByEmail)
-
-// export default userRouter; 

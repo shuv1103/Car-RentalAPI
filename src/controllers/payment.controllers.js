@@ -5,7 +5,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { clientCommandMessageReg } from "bullmq";
 
-const generatePaymentOrder = asyncHandler(async(req,res) => {
+const generatePaymentOrder = asyncHandler(async(req,res,next) => {
     const {amount, receiptId} = req.body;
 
     if([amount,receiptId].some( value => value == null || value == ''))
@@ -31,11 +31,11 @@ const generatePaymentOrder = asyncHandler(async(req,res) => {
     )
 });
 
-const verifyPaymentController = asyncHandler(async(req,res) => {
-    return verifyPayment(req,res);
+const verifyPaymentController = asyncHandler(async(req,res,next) => {
+    return verifyPayment(req,res,next);
 });
 
-const razorpayWebhookController = asyncHandler(async(req,res) => {
+const razorpayWebhookController = asyncHandler(async(req,res,next) => {
     const razorpaySignature = req.headers["x-razorpay-signature"];
 
     if(!razorpaySignature)
