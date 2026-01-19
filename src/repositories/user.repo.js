@@ -11,11 +11,17 @@ const addUser = asyncHandler(async(req,res)=>{
 
 // Get user by their ID
 const getUserById = asyncHandler(async(req,res)=>{
-    const {userId} = req.query 
+    const {userId} = req.params
     // console.log(userId) -> debug purpose
     const trimmedUserId = userId.trim() // to remove trailing spaces from "userId"
     // console.log(trimmedUserId) -> debug purpose
-    const user = await User.findOne({userId: trimmedUserId})
+
+    // USER → can access only own data
+    if (req.user.role === "user" && req.user.userId !== trimmedUserId) {
+        throw new ApiError(403, "You can only access your own profile");
+    }
+
+    const user = await User.findOne({userId: trimmedUserId}).select("-password -refreshToken");
     if(!user)
     {
         throw new ApiError(404,"User not found!")
