@@ -91,6 +91,39 @@ The backend sends automated emails in these cases:
 
 ---
 
+## API Reference
+
+---
+
+### Register User 
+
+```http
+POST /api/v1/users/register
+```
+| Parameter  | Type     | Description                  |
+| :--------- | :------- | :--------------------------- |
+| `name`     | `string` |  Full name(**Required**.) |
+| `email`    | `string` |  Email(**Required**.)     |
+| `password` | `string` |  Password(**Required**.)  |
+| `role`     | `string` | Role - "User" or "Admin" (**Required**.)      |
+
+**Description** -
+Registers a new user by validating inputs, hashing the password using bcrypt, and storing the user securely in the database.
+
+**Request**
+___________
+<img width="490" height="312" alt="image" src="https://github.com/user-attachments/assets/78cb551a-6b53-44a0-9df4-b170c3b2b6a0" />
+_____
+
+**Response**
+____
+<img width="555" height="401" alt="image" src="https://github.com/user-attachments/assets/156d5dca-517d-4523-8686-051e5333deee" />
+____
+
+
+
+
+
 
 
    
