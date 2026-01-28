@@ -91,6 +91,60 @@ The backend sends automated emails in these cases:
 
 ---
 
+## System Architecture Diagram
+_____
+<img width="906" height="389" alt="image" src="https://github.com/user-attachments/assets/e99f6ede-c31f-470b-959b-8cd422f2bfcf" />
+
+### **Architecture Layers**
+#### 1. Client Layer
+- Frontend application or Postman sends HTTP requests to the backend.
+
+#### 2. API & Security Layer
+- **Express Server(API Gateway)** receives all incoming requests.
+- **JWT Authentication & RBAC Middleware** validates user identity and access permissions.
+
+#### 3. Controller Layer
+- Responsible for request routing and response handling:
+  - `UserController`
+  - `CarController`
+  - `PaymentController`
+
+#### 4. Service Layer
+- Contains all core business logic:
+  - `UserService` – user management and profile handling
+  - `CarService` – car availability, booking logic
+  - `WaitlistService` – waitlist orchestration and async processing
+  - `PaymentService` – payment flow and booking confirmation
+  - `EmailService` – notification handling
+
+#### 5. Repository Layer
+- Abstracts database operations and isolates persistence logic:
+  - `UserRepository`
+  - `CarRepository`
+  - `BookingRepository`
+
+#### 6. Data & Messaging Layer
+- **MongoDB** – persistent storage for users, cars, and bookings
+- **Redis (ZSET)** – efficient waitlist management
+- **BullMQ** – background job processing for waitlist notifications
+
+#### 7. External Integrations
+- **Razorpay** – payment creation and verification
+- **Nodemailer** – email notifications (booking confirmation & waitlist alerts)
+
+
+
+### End-to-End Backend Workflow
+1. User sends an HTTP request via frontend/Postman.
+2. API Gateway forwards the request through JWT Auth Middleware.
+3. Authorized requests are routed to the appropriate controller.
+4. Controllers delegate business logic to service classes.
+5. Services interact with repositories for database operations.
+6. If a car is unavailable, users are added to a Redis waitlist and processed asynchronously using BullMQ.
+7. Payments are handled via Razorpay and booking data is persisted in MongoDB.
+8. Email notifications are sent via SMTP for confirmations and waitlist updates.
+
+
 ## API Reference
 
 ---
