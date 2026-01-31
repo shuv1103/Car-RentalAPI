@@ -172,6 +172,27 @@ ___________
 ____
 <img width="555" height="401" alt="image" src="https://github.com/user-attachments/assets/156d5dca-517d-4523-8686-051e5333deee" />
 
+### Login User
+
+```http
+POST /api/v1/users/login
+```
+
+| Parameter  | Type     | Description              |
+| :--------- | :------- | :----------------------- |
+| `email`    | `string` | Email (**Required**.)    |
+| `password` | `string` | Password (**Required**.) |
+
+**Description** -
+Authenticates an existing user by validating credentials, securely comparing the hashed password using bcrypt, and generating a JWT token for authorized access to protected APIs.
+
+### Request
+___________
+<img width="491" height="261" alt="image" src="https://github.com/user-attachments/assets/ba49d75e-c4c9-4932-9bdf-c3b35b17e7d2" />
+
+### Response
+____
+<img width="604" height="479" alt="image" src="https://github.com/user-attachments/assets/547f4d98-d238-43b2-bb54-562e9f90ae24" />
 
 
 
