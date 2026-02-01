@@ -194,6 +194,30 @@ ___________
 ____
 <img width="604" height="479" alt="image" src="https://github.com/user-attachments/assets/547f4d98-d238-43b2-bb54-562e9f90ae24" />
 
+###  Get User Details by ID
+
+```http
+GET /api/v1/users/{id}
+```
+
+| Parameter | Type     | Description             |
+| :-------- | :------- | :---------------------- |
+| `id`      | `string` | User ID (**Required**.) |
+
+Description –
+Retrieves user details using the user ID provided as a path parameter. The request is authorized using a JWT token, and sensitive fields such as passwords are excluded from the response.
+
+## Request
+______
+- **Path Parameter** : id – User ID (e.g., HK0X)
+- **Headers** - Authorization: Bearer <JWT_TOKEN>
+<img width="893" height="159" alt="image" src="https://github.com/user-attachments/assets/ae052dc6-366f-466e-a134-d5a98a015711" />
+
+## Response
+_______
+<img width="430" height="344" alt="image" src="https://github.com/user-attachments/assets/fc3165e7-a656-4c7f-a689-ab4bc7112338" />
+
+
 
 
 
