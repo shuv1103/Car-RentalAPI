@@ -205,7 +205,8 @@ GET /api/v1/users/{id}
 | `id`      | `string` | User ID (**Required**.) |
 
 **Description** –
-Retrieves user details using the user ID provided as a path parameter. The request is authorized using a JWT token, and sensitive fields such as passwords are excluded from the response.
+- Retrieves user details using the user ID provided as a path parameter. 
+- The request is authorized using a JWT token, and sensitive fields such as passwords are excluded from the response.
 
 ## Request
 - **Path Parameter** : id – User ID (e.g., HK0X)
@@ -227,7 +228,8 @@ GET /api/v1/users/
 
 
 **Description** –
-Fetches user details using the email address provided in the request body. This endpoint is restricted to Admin users only and is protected using JWT authentication with role-based access control.
+- Fetches user details using the email address provided in the request body.
+- This endpoint is restricted to Admin users only and is protected using JWT authentication with role-based access control.
 
 ## Request
 - **Headers** - Authorization: Bearer <JWT_TOKEN>
@@ -260,5 +262,31 @@ POST /api/v1/users/logout
 ____
 <img width="425" height="146" alt="image" src="https://github.com/user-attachments/assets/fb60c9b1-f831-4e2d-a211-c88a79a4c461" />
 
+###  Add Car to Inventory (Admin Only)
+
+```http
+POST /api/v1/cars
+```
+
+| Parameter      | Type     | Description                                             |
+| :------------- | :------- | :------------------------------------------------------ |
+| `manufacturer` | `string` | Car manufacturer (**Required**.)                        |
+| `model`        | `string` | Car model name (**Required**.)                          |
+| `year`         | `string` | Manufacturing year (**Required**.)                      |
+| `pricePerDay`  | `string` | Rental price per day (**Required**.)                    |
+| `count`        | `string` | Number of cars available for this model (**Required**.) |
+
+
+**Description** –
+- Adds a new car to the system with manufacturer details, model information, pricing, and available stock count. 
+- This endpoint is restricted to Admin users only and is secured using JWT authentication with role-based access control.
+
+## Request
+____
+<img width="420" height="333" alt="image" src="https://github.com/user-attachments/assets/49281cde-90c1-4caf-8d40-1ee119c4fe3d" />
+
+## Response
+____
+<img width="479" height="483" alt="image" src="https://github.com/user-attachments/assets/abe0cd9f-7d0e-4844-9491-142f87633177" />
 
 
