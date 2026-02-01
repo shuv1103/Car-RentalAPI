@@ -204,11 +204,10 @@ GET /api/v1/users/{id}
 | :-------- | :------- | :---------------------- |
 | `id`      | `string` | User ID (**Required**.) |
 
-Description –
+**Description** –
 Retrieves user details using the user ID provided as a path parameter. The request is authorized using a JWT token, and sensitive fields such as passwords are excluded from the response.
 
 ## Request
-______
 - **Path Parameter** : id – User ID (e.g., HK0X)
 - **Headers** - Authorization: Bearer <JWT_TOKEN>
 <img width="893" height="159" alt="image" src="https://github.com/user-attachments/assets/ae052dc6-366f-466e-a134-d5a98a015711" />
@@ -217,12 +216,49 @@ ______
 _______
 <img width="430" height="344" alt="image" src="https://github.com/user-attachments/assets/fc3165e7-a656-4c7f-a689-ab4bc7112338" />
 
+###  Get User Details by Email (Admin Only)
+
+```http
+GET /api/v1/users/
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `email`   | `string` | User email (**Required**.) |
 
 
+**Description** –
+Fetches user details using the email address provided in the request body. This endpoint is restricted to Admin users only and is protected using JWT authentication with role-based access control.
+
+## Request
+- **Headers** - Authorization: Bearer <JWT_TOKEN>
+<img width="490" height="238" alt="image" src="https://github.com/user-attachments/assets/93dc2950-2ccb-4727-9d45-6e3f94b44fbb" />
+
+## Response 
+___
+<img width="1030" height="494" alt="image" src="https://github.com/user-attachments/assets/e8f4120e-c468-4857-9af7-703cef74680e" />
 
 
+### Logout User
 
+```http
+POST /api/v1/users/logout
+```
 
-   
+| Parameter | Type | Description     |
+| :-------- | :--- | :-------------- |
+| —         | —    | No request body |
+
+**Description** –
+- Clears accessToken and refreshToken cookies from the client.
+- Prevents further access to protected APIs after logout.
+
+## Request
+- **Headers** - Authorization: Bearer <JWT_TOKEN>
+<img width="461" height="58" alt="image" src="https://github.com/user-attachments/assets/c2bc0cd0-56d7-4210-99ea-21b723b1f1f6" />
+
+## Response
+____
+<img width="425" height="146" alt="image" src="https://github.com/user-attachments/assets/fb60c9b1-f831-4e2d-a211-c88a79a4c461" />
+
 
 
