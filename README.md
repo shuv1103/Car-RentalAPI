@@ -290,3 +290,31 @@ ____
 <img width="479" height="483" alt="image" src="https://github.com/user-attachments/assets/abe0cd9f-7d0e-4844-9491-142f87633177" />
 
 
+###  Rent Car(User/Admin)
+
+```http
+POST /api/v1/cars/{carId}/rent
+```
+
+| Parameter   | Type                  | Description                       |
+| :---------- | :-------------------- | :-------------------------------- |
+| `carId`     | `string`              | Car ID (**Required**.)            |
+| `email`     | `string`              | User email (**Required**.)        |
+| `startDate` | `string (YYYY-MM-DD)` | Rental start date (**Required**.) |
+| `endDate`   | `string (YYYY-MM-DD)` | Rental end date (**Required**.)   |
+
+**Description** –
+- Allows a user to rent a car for a specified date range. The system checks car availability, validates booking dates, and creates a booking record.
+- If the car is unavailable, the user is added to a waitlist for asynchronous processing.
+
+## Request
+____
+<img width="493" height="289" alt="image" src="https://github.com/user-attachments/assets/bbf48a6e-ab25-496c-ac21-0da2e0137387" />
+
+## Response
+____
+<img width="818" height="545" alt="image" src="https://github.com/user-attachments/assets/9a67dfab-2754-4c84-a672-591f2f1ca9b0" />
+
+
+
+
