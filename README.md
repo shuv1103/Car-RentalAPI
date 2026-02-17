@@ -315,6 +315,8 @@ ____
 ____
 <img width="818" height="545" alt="image" src="https://github.com/user-attachments/assets/9a67dfab-2754-4c84-a672-591f2f1ca9b0" />
 
-
+**Email Notification**
+-------
+<img width="488" height="248" alt="image" src="https://github.com/user-attachments/assets/8cac550c-2da1-4fc2-adad-c836272ff479" />
 
 
