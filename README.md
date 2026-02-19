@@ -85,9 +85,10 @@ A scalable backend system for a **Car Rental Platform** built with **Node.js**, 
 ### **Email Notifications**
 
 The backend sends automated emails in these cases:
-1. **Waitlist Turn** — User is notified when their waitlisted car is available.
-2. **Waitlist Fallback** — User is notified when their waitlist request expires.
-3. **Car Return** — Admin receives uploaded car images for inspection.
+1. **Rent Car** - User is notified when they successfully rent a car.
+2. **Waitlist Turn** — User is notified when their waitlisted car is available.
+3. **Waitlist Fallback** — User is notified when their waitlist request expires.
+4. **Car Return** — Admin receives uploaded car images for inspection.
 
 ---
 
