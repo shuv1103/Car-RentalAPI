@@ -325,8 +325,6 @@ ____
 
 | Component | File | Implementation Detail | Actual Value / Example |
 |---|---|---|---|
-| Redis connection config | `src/config/redis.config.js` | `{ host, port }` shared by ioredis client and BullMQ | `REDIS_HOST=localhost`, `REDIS_PORT=6379` (from `.env`) |
-| `redisClient` | `waitList.service.js:11-26` | ioredis instance for direct ZSET/lock ops; auto-reconnect on drop | `retryStrategy: min(times*500, 5000)ms`, gives up after `times > 10` |
 | `waitlist:{carMongoId}` | ZSET, no TTL | FIFO queue — member=userId, score=join timestamp | e.g. `waitlist:66a1f2c9e4b0d3a1f8c9e123` → `ZADD key 1755331200000 "66b2..."`; `ZPOPMIN`/`ZRANK`/`ZCARD` for dequeue/position/size |
 | `waitlist:lock:{carMongoId}` | STRING, TTL 900s | Holds userId with the active booking window | e.g. `SET waitlist:lock:66a1f2c9... "66b2..." EX 900` — expires in exactly 15 min if untouched |
 | `waitListQueue` | BullMQ `Queue("carWaitList")` | Producer; retry + retention policy | `attempts: 3`, `backoff: {type:"exponential", delay:5000}`, `removeOnComplete: {count:200, age:86400}`, `removeOnFail: {count:100, age:604800}` |
